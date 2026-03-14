@@ -103,9 +103,11 @@ export default class ScreenManager {
   }
 
   initiateCompMove() {
-    const availableCells = this.humanPlayer.board.emptyCells;
-    const targetCellIndex = availableCells.at(Math.floor(Math.random() * availableCells.length));
-    this.processAttack(targetCellIndex);
+    setTimeout(() => {
+      const availableCells = this.humanPlayer.board.emptyCells;
+      const targetCellIndex = availableCells.at(Math.floor(Math.random() * availableCells.length));
+      this.processAttack(targetCellIndex);
+    }, Math.random() * 1200);
   }
 
   updateBoard(player = this.currDefender) {
