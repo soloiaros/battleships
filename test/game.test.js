@@ -66,12 +66,41 @@ describe('Test the Gameboard functionality', () => {
   
   it('Can determine if cell is suitable for shot', () => {
     board.placeShip([0, 0], [0, 1], [0, 2]);
+
     board.shoot([1, 1]);
     expect(board.canShoot([1, 1])).toBeFalsy();
+
     expect(board.canShoot([0, 1])).toBeTruthy();
+    board.shoot([0, 1]);
+    expect(board.canShoot([0, 1])).toBeFalsy();
+
     expect(board.canShoot([7, 7])).toBeTruthy();
     expect(board.canShoot([-1, -1])).toBeFalsy();
     expect(board.canShoot([10, 10])).toBeFalsy();
+  });
+
+  it('Can register a ship being placed', () => {
+    board.placeShip([0, 0], [0, 1], [0, 2]);
+    board.placeShip([2, 2]);
+    board.placeShip([9, 8], [9, 9]);
+    expect(board.shipsAlive).toBe(3);
+  });
+
+  it('Can register a ship being sunk', () => {
+    board.placeShip([0, 0], [0, 1], [0, 2]);
+    board.placeShip([2, 2]);
+    board.placeShip([9, 8], [9, 9]);
+
+    board.shoot([2, 2])
+    expect(board.shipsAlive).toBe(2);
+    
+    board.shoot([9, 8]);
+    board.shoot([9, 9]);
+    expect(board.shipsAlive).toBe(1);
+    
+    board.shoot([0, 0]);
+    board.shoot([0, 1]);
+    expect(board.shipsAlive).toBe(1);
   });
   
 })
