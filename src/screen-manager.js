@@ -35,7 +35,12 @@ export default class ScreenManager {
   }
 
   startGame() {
+    this.humanPlayer = new HumanPlayer();
+    this.compPlayer = new ComputerPlayer();
+    this.currDefender = this.compPlayer;
+
     this.setUpBoards();
+    this.updateBoard();
     this.takeTurn();
     this.updateBoard();
   }
@@ -80,10 +85,10 @@ export default class ScreenManager {
     this.processAttack(targetCellIndex);
   }
 
-  updateBoard() {
-    const shotMap = this.currDefender.board.shotMap;
-    const shipMap = this.currDefender.board.shipMap;
-    const board = document.querySelector(`.board-container:nth-child(${this.currDefender === this.compPlayer ? 2 : 1}) table`);
+  updateBoard(player = this.currDefender) {
+    const shotMap = player.board.shotMap;
+    const shipMap = player.board.shipMap;
+    const board = document.querySelector(`.board-container:nth-child(${player === this.compPlayer ? 2 : 1}) table`);
 
     for (let i = 0; i < 10; i++) {
       for (let j = 0; j < 10; j++) {
