@@ -39,6 +39,12 @@ export default class ScreenManager {
     this.compPlayer = new ComputerPlayer();
     this.currDefender = this.compPlayer;
 
+    const startBtn = document.getElementById('start-btn');
+    const turnDisplay = document.getElementById('turn-display');
+    
+    startBtn.style.display = 'none';
+    turnDisplay.style.display = 'block';
+
     this.cleanUp();
     this.setUpBoards();
     this.updateBoard(this.humanPlayer);
