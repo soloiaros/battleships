@@ -152,28 +152,31 @@ table {
   border-collapse: collapse;
   border: 3px solid var(--board-border);
   table-layout: fixed;
+
+  td div {
+    position: relative;
+    
+    &.ship.hit {
+      background-color: var(--warning-color);
+    }
+  
+    &.hit::after {
+      content: '\22C5';
+      font-size: 4rem;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &#table-1 {
+      td div.ship {
+        background-color: var(--accent-color-blue);
+      }
+    }
 }
 
-td div {
-  position: relative;
-
-  &.ship.hit {
-    background-color: var(--warning-color);
-  }
-
-  &.ship {
-    background-color: var(--accent-color-blue);
-  }
-
-  &.hit::after {
-    content: '\22C5';
-    font-size: 4rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-}
 
 .board-cell {
   width: var(--cell-size);
