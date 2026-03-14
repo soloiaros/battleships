@@ -35,29 +35,52 @@ main {
 
 .settings-bar {
   position: fixed;
-  right: 1rem;
-  top: 1rem;
+  right: 1.5rem;
+  top: 1.5rem;
   display: flex;
   align-items: center;
-  padding: 0.5rem 1rem;
-  gap: 1rem;
-  border-radius: 24px;
-  background-color: var(--text-color);
+  padding: 0.6rem 1.2rem;
+  gap: 1.2rem;
+  border-radius: 30px;
+  background-color: color-mix(in srgb, var(--text-color), transparent 85%);
+  backdrop-filter: blur(8px);
+  border: 1px solid color-mix(in srgb, var(--text-color), transparent 90%);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  z-index: 100;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: color-mix(in srgb, var(--text-color), transparent 80%);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
 
   button {
-    width: 2rem;
-    height: 2rem;
+    width: 2.2rem;
+    height: 2.2rem;
     border-radius: 50%;
     border: none;
-    background-color: oklch(from var(--background-color) 85% c h);
+    background-color: color-mix(in srgb, var(--text-color), transparent 90%);
     padding: 0;
     display: grid;
     place-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
 
-    svg {
-      fill: var(--background-color);
+    &:hover {
+      background-color: color-mix(in srgb, var(--text-color), transparent 70%);
+      transform: scale(1.1);
     }
 
+    svg {
+      fill: var(--text-color);
+      width: 1.2rem;
+      height: 1.2rem;
+      transition: fill 0.3s ease;
+    }
   }
   #theme-toggle svg:first-child {
   display: block;
@@ -99,10 +122,15 @@ main {
   margin: 0;
   padding: 0;
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
+  gap: 0.5rem;
   h1 {
     margin: 0;
     padding: 0;
+  }
+  svg {
+    fill: var(--accent-color-yellow);
+    height: 150%;
   }
 }
 
@@ -118,11 +146,20 @@ main {
 .info-area {
   flex: 0 0 10%;
   background-color: var(--background-color);
-  color: white;
+  color: var(--text-color);
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+
+  button {
+    background-color: var(--accent-color-blue);
+    font: inherit;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    color: #f0f2f5;
+  }
 }
 
 .board-container {
