@@ -1,4 +1,4 @@
-import { Ship, Gameboard, HumanPlayer, ComputerPlayer } from "../src/game.js";
+import { Ship, Gameboard, HumanPlayer, ComputerPlayer } from "../src/base-classes.js";
 
 describe('Test the Ship functionality', () => {
 
@@ -124,6 +124,18 @@ describe('Test the Gameboard functionality', () => {
     board.shoot([5, 3]);
     expect(board.emptyCellsLeft).toBe(85);
   });
+
+  it('Returns correct list of available coordinates', () => {
+    board.placeShip([5, 5], [5, 4], [5, 3]);
+    board.placeShip([1, 1]);
+    board.shoot([1, 1]);
+
+    expect(JSON.stringify(board.emptyCells)).toContain('[9,9]');
+    expect(JSON.stringify(board.emptyCells)).toContain('[7,3]');
+    expect(JSON.stringify(board.emptyCells)).toContain('[5,4]');
+    expect(JSON.stringify(board.emptyCells)).not.toContain('[1,1]');
+    expect(JSON.stringify(board.emptyCells)).not.toContain('[0,0]');
+  })
   
 });
 
