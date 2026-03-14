@@ -1,4 +1,4 @@
-import { Ship } from "../src/game.js";
+import { Ship, Gameboard } from "../src/game.js";
 
 describe('Test the Ship functionality', () => {
 
@@ -70,4 +70,34 @@ describe('Test the Ship functionality', () => {
     expect(ship.isSunk).toBeTruthy();
   });
 
+});
+
+
+describe('Test the Gameboard functionality', () => {
+
+  let board;
+  beforeEach(() => {
+    board = new Gameboard();
+  });
+  
+  it('Can register a missed shot', () => {
+    board.placeShip([0, 0], [0, 1], [0, 2]);
+    expect(() => { board.shoot([1, 1]) }).not.toThrow();
+  });
+  
+  it('Can register a hit shot', () => {
+    board.placeShip([0, 0], [0, 1], [0, 2]);
+    expect(() => { board.shoot([0, 1]) }).not.toThrow();
+  });
+  
+  it('Can determine if cell is suitable for shot', () => {
+    board.placeShip([0, 0], [0, 1], [0, 2]);
+    board.shoot([1, 1]);
+    expect(board.canShoot([1, 1])).toBeFalsy();
+    expect(board.canShoot([0, 1])).toBeTruthy();
+    expect(board.canShoot([7, 7])).toBeTruthy();
+    expect(board.canShoot([-1, -1])).toBeFalsy();
+    expect(board.canShoot([10, 10])).toBeFalsy();
+  });
+  
 })
