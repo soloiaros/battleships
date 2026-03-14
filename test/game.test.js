@@ -1,4 +1,4 @@
-import { Ship, Gameboard } from "../src/game.js";
+import { Ship, Gameboard, HumanPlayer, ComputerPlayer } from "../src/game.js";
 
 describe('Test the Ship functionality', () => {
 
@@ -125,4 +125,17 @@ describe('Test the Gameboard functionality', () => {
     expect(board.emptyCellsLeft).toBe(85);
   });
   
+});
+
+
+describe('Test the Player functionality', () => {
+
+  it('Human player is defined', () => {
+    expect(() => { new HumanPlayer() }).not.toThrow();
+  });
+
+  it('Computer player is defined', () => {
+    expect(() => { new ComputerPlayer() }).not.toThrow();
+  });
+
 })
