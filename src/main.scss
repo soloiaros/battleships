@@ -130,12 +130,49 @@ main {
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+
+  &:has(table.inactive) {
+    pointer-events: none;
+    position: relative;
+  }
+  &:has(table.inactive)::after {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: rgba(134, 134, 134, 0.5);
+    border-radius: inherit;
+  }
 }
 
 table {
   border-collapse: collapse;
   border: 3px solid var(--board-border);
   table-layout: fixed;
+}
+
+td div {
+  position: relative;
+
+  &.ship.hit {
+    background-color: var(--warning-color);
+  }
+
+  &.ship {
+    background-color: var(--accent-color-blue);
+  }
+
+  &.hit::after {
+    content: '\22C5';
+    font-size: 4rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .board-cell {
