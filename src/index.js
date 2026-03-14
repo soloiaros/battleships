@@ -1,1 +1,4 @@
-console.log("Hello This is a Javascript project.");
+import "./main.scss";
+import setUpEventListeners from "./interface";
+
+setUpEventListeners();
