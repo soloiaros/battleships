@@ -47,4 +47,15 @@ export class Gameboard {
   canShoot(YXPair) {
     return YXPair.every((coord) => coord >= 0 && coord < 10) && !this.shotMap[YXPair.at(0)][YXPair.at(1)];
   }
+
+  get shipsAlive() {
+    const ships = new Array();
+    for (let i = 0; i < 10; i++) {
+      for (let j = 0; j < 10; j++) {
+        if (this.shipMap[i][j] && !ships.includes(this.shipMap[i][j]) && !this.shipMap[i][j].isSunk) ships.push(this.shipMap[i][j]);
+      }
+    }
+    return ships.length;
+  }
+
 }
