@@ -5,8 +5,669 @@
         <title>Battleships</title>
     </head>
     <body>
-        <h1>Hello world!</h1>
-        <h2>Tip: Check your console</h2>
+        <main>
+            <div class="settings-bar">
+                <button class="settings-btn" id="sound-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M640-440v-80h160v80H640Zm48 280-128-96 48-64 128 96-48 64Zm-80-480-48-64 128-96 48 64-128 96ZM120-360v-240h160l200-200v640L280-360H120Zm280-246-86 86H200v80h114l86 86v-252ZM300-480Z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="m616-320-56-56 104-104-104-104 56-56 104 104 104-104 56 56-104 104 104 104-56 56-104-104-104 104Zm-496-40v-240h160l200-200v640L280-360H120Zm280-246-86 86H200v80h114l86 86v-252ZM300-480Z"/></svg>
+                </button>
+                <button class="settings-btn" id="theme-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M600-640 480-760l120-120 120 120-120 120Zm200 120-80-80 80-80 80 80-80 80ZM483-80q-84 0-157.5-32t-128-86.5Q143-253 111-326.5T79-484q0-146 93-257.5T409-880q-18 99 11 193.5T520-521q71 71 165.5 100T879-410q-26 144-138 237T483-80Zm0-80q88 0 163-44t118-121q-86-8-163-43.5T463-465q-61-61-97-138t-43-163q-77 43-120.5 118.5T159-484q0 135 94.5 229.5T483-160Zm-20-305Z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M565-395q35-35 35-85t-35-85q-35-35-85-35t-85 35q-35 35-35 85t35 85q35 35 85 35t85-35Zm-226.5 56.5Q280-397 280-480t58.5-141.5Q397-680 480-680t141.5 58.5Q680-563 680-480t-58.5 141.5Q563-280 480-280t-141.5-58.5ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Zm326-268Z"/></svg>
+                </button>
+            </div>
+            <div class="boards-area">
+                <div class="board-container">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="board-container">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                            <td>
+                                <div class="board-cell"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="info-area"></div>
+        </main>
     </body>
     
 </html>
