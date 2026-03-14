@@ -39,17 +39,17 @@ export default class ScreenManager {
     this.compPlayer = new ComputerPlayer();
     this.currDefender = this.compPlayer;
 
+    this.cleanUp();
     this.setUpBoards();
-    this.updateBoard();
+    this.updateBoard(this.humanPlayer);
+    this.updateBoard(this.compPlayer);
     this.takeTurn();
-    this.updateBoard();
   }
 
   setUpBoards() {
     // For temporary testing only
     this.humanPlayer.board.placeShip([1, 1], [1, 2], [1, 3], [1, 4])
     this.humanPlayer.board.placeShip([5, 5], [6, 5])
-    this.compPlayer.board.placeShip([2, 2], [3, 2], [4, 2], [5, 2])
     this.compPlayer.board.placeShip([7, 7], [7, 8])
   }
 
@@ -62,6 +62,23 @@ export default class ScreenManager {
 
     document.querySelector(`.board-container:nth-child(1) table`).classList = 'inactive';
     document.querySelector(`.board-container:nth-child(2) table`).classList = 'inactive';
+  }
+
+  cleanUp() {
+    const tableHuman = document.querySelector(`.board-container:nth-child(1) table`);
+    const tableComp = document.querySelector(`.board-container:nth-child(2) table`);
+
+    for (let i = 1; i <= 10; i++) {
+      for (let j = 1; j <= 10; j++) {
+        tableHuman.querySelector(`tr:nth-of-type(${i}) td:nth-child(${j}) div`).classList = 'board-cell';
+      }
+    }
+
+    for (let i = 1; i <= 10; i++) {
+      for (let j = 1; j <= 10; j++) {
+        tableComp.querySelector(`tr:nth-of-type(${i}) td:nth-child(${j}) div`).classList = 'board-cell';
+      }
+    }
   }
 
   takeTurn() {

@@ -153,11 +153,22 @@ table {
   border: 3px solid var(--board-border);
   table-layout: fixed;
 
-  td div {
+  &#table-1 {
+    td div.ship {
+      background-color: var(--accent-color-blue);
+    }
+  }
+
+  &#table-1 td div,
+  &#table-2 td div {
     position: relative;
     
     &.ship.hit {
       background-color: var(--warning-color);
+    }
+
+    &.ship.hit::after {
+      content: '';
     }
   
     &.hit::after {
@@ -170,12 +181,6 @@ table {
       pointer-events: none;
     }
   }
-
-  &#table-1 {
-      td div.ship {
-        background-color: var(--accent-color-blue);
-      }
-    }
 }
 
 
