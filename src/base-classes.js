@@ -73,7 +73,17 @@ export class Gameboard {
         if (!this.shotMap[i][j]) count += 1;
       }
     }
-    return count
+    return count;
+  }
+
+  get emptyCells() {
+    let cells = [];
+    for (let i = 0; i < 10; i++) {
+      for (let j = 0; j < 10; j++) {
+        if (!this.shotMap[i][j]) cells.push([i, j]);
+      }
+    }
+    return cells;
   }
 
   markVerifiedEmpty(shipObj) {
