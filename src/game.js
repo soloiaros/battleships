@@ -94,5 +94,22 @@ export class Gameboard {
       }
     }
   }
+}
 
+class Player {
+  constructor() {
+    this.board = new Gameboard();
+  }
+}
+
+export class HumanPlayer extends Player {
+  constructor() {
+    super();
+  }
+}
+
+export class ComputerPlayer extends Player {
+  constructor() {
+    super();
+  }
 }
