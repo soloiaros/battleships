@@ -16,6 +16,8 @@ export default class ScreenManager {
       }
     }
 
+    
+    this.enterPlanningStage();
     const startBtn = document.getElementById('start-btn');
     startBtn.addEventListener('click', () => { this.startGame(); });
   }
@@ -35,8 +37,6 @@ export default class ScreenManager {
   }
 
   startGame() {
-    this.humanPlayer = new HumanPlayer();
-    this.compPlayer = new ComputerPlayer();
     this.currDefender = this.compPlayer;
 
     const startBtn = document.getElementById('start-btn');
@@ -45,8 +45,6 @@ export default class ScreenManager {
     startBtn.style.display = 'none';
     turnDisplay.style.display = 'block';
 
-    this.cleanUp();
-    this.setUpBoards();
     this.updateBoard(this.humanPlayer);
     this.updateBoard(this.compPlayer);
     this.takeTurn();
@@ -68,6 +66,59 @@ export default class ScreenManager {
 
     document.querySelector(`.board-container:nth-child(1) table`).classList = 'inactive';
     document.querySelector(`.board-container:nth-child(2) table`).classList = 'inactive';
+
+    setTimeout(() => {
+      this.enterPlanningStage();
+    }, 2000);
+  }
+
+  enterPlanningStage() {
+    this.humanPlayer = new HumanPlayer();
+    this.compPlayer = new ComputerPlayer();
+    this.cleanUp();
+    this.placeShipsRandomly(this.humanPlayer.board);
+    this.placeShipsRandomly(this.compPlayer.board);
+    this.updateBoard(this.humanPlayer);
+    this.updateBoard(this.compPlayer);
+    document.querySelector(`.board-container:nth-child(1) table`).classList = 'active';
+    document.querySelector(`.board-container:nth-child(2) table`).classList = 'inactive';
+  }
+
+  placeShipsRandomly(board) {
+    const ships = [1, 1, 1, 1, 2, 2, 2, 3, 3, 4];
+    
+    let ship = ships.pop();
+    shipsLoop: while (true) {
+      if (!ships.length) break;
+
+      let initCoord = board.emptyCells;
+      initCoord = initCoord.at(Math.floor(Math.random() * initCoord.length));
+      const xDirection = [-1, 1, 0].at(Math.floor(Math.random() * 3));
+      const yDirection = xDirection === 0 ? [-1, 1].at(Math.floor(Math.random() * 2)) : 0;
+      const shipCoords = [];
+      for (let shipCellN = 0; shipCellN < ship; shipCellN++) {
+        let i = initCoord[0] + yDirection * shipCellN;
+        let j = initCoord[1] + xDirection * shipCellN;
+        shipCoords.push([i, j]);
+      }
+
+      for (let YXPair of shipCoords) {
+        if (YXPair[0] < 0 || YXPair[0] >= 10 || YXPair[1] < 0 || YXPair[1] >= 10 || board.shipMap[YXPair.at(0)][YXPair.at(1)]) continue shipsLoop;
+
+        for (let iDiff of [-1, 0, 1]) { // check for the buffer zone
+          for (let jDiff of [-1, 0, 1]) {
+            if (YXPair[0] + iDiff >= 0 && YXPair[0] + iDiff < 10 && YXPair[1] + jDiff >= 0 && YXPair[1] + jDiff < 10) {
+              if (board.shipMap[YXPair.at(0) + iDiff][YXPair.at(1) + jDiff]) continue shipsLoop;
+            }
+          }
+        }
+      }
+
+      // if the zone os clear for placement
+      board.placeShip(...shipCoords);
+      ship = ships.pop();
+    }
+
   }
 
   cleanUp() {
