@@ -102,5 +102,27 @@ describe('Test the Gameboard functionality', () => {
     board.shoot([0, 1]);
     expect(board.shipsAlive).toBe(1);
   });
+
+  it('Outputs the amount of empty cells left', () => {
+    expect(board.emptyCellsLeft).toBe(100);
+    board.shoot([0, 0]);
+    expect(board.emptyCellsLeft).toBe(99);
+    board.shoot([9, 9]);
+    expect(board.emptyCellsLeft).toBe(98);
+  });
+
+  it('Marks verified empty cells - single-cell ship', () => {
+    board.placeShip([0, 0]);
+    board.shoot([0, 0]);
+    expect(board.emptyCellsLeft).toBe(96);
+  });
+
+  it('Marks verified empty cells - tripple-cell ship', () => {
+    board.placeShip([5, 5], [5, 4], [5, 3]);
+    board.shoot([5, 5]);
+    board.shoot([5, 4]);
+    board.shoot([5, 3]);
+    expect(board.emptyCellsLeft).toBe(85);
+  });
   
 })
