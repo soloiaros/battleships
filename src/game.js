@@ -38,8 +38,16 @@ export class Gameboard {
       this.shipMap[YXPair.at(0)][YXPair.at(1)] = ship;
     }
   }
+  
+  shoot(YXPair) { // method for handling all events that happen on incoming shot
+    this.receiveAttack(YXPair);
+    
+    if (this.shipMap[YXPair.at(0)][YXPair.at(1)] && this.shipMap[YXPair.at(0)][YXPair.at(1)].isSunk) {
+      this.markVerifiedEmpty(this.shipMap[YXPair.at(0)][YXPair.at(1)]);
+    }
+  }
 
-  shoot(YXPair) {
+  receiveAttack(YXPair) {
     this.shotMap[YXPair.at(0)][YXPair.at(1)] = 1;
     if (this.shipMap[YXPair.at(0)][YXPair.at(1)]) this.shipMap[YXPair.at(0)][YXPair.at(1)].hit();
   }
@@ -56,6 +64,35 @@ export class Gameboard {
       }
     }
     return ships.length;
+  }
+
+  get emptyCellsLeft() {
+    let count = 0;
+    for (let i = 0; i < 10; i++) {
+      for (let j = 0; j < 10; j++) {
+        if (!this.shotMap[i][j]) count += 1;
+      }
+    }
+    return count
+  }
+
+  markVerifiedEmpty(shipObj) {
+    const shipCoords = [];
+    for (let i = 0; i < 10; i++) {
+      for (let j = 0; j < 10; j++) {
+        if (this.shipMap[i][j] === shipObj) shipCoords.push([i, j]);
+      }
+    }
+
+    for (let [i, j] of shipCoords) {
+      for (let iDiff of [-1, 0, 1]) {
+        for (let jDiff of [-1, 0, 1]) {
+          if ([i + iDiff, j + jDiff].every(coord => coord >= 0 && coord < 10) && !this.shotMap[i + iDiff][j + jDiff]) {
+            this.shotMap[i + iDiff][j + jDiff] = 1;
+          }
+        }
+      }
+    }
   }
 
 }
