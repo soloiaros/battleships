@@ -50,13 +50,6 @@ export default class ScreenManager {
     this.takeTurn();
   }
 
-  setUpBoards() {
-    // For temporary testing only
-    this.humanPlayer.board.placeShip([1, 1], [1, 2], [1, 3], [1, 4])
-    this.humanPlayer.board.placeShip([5, 5], [6, 5])
-    this.compPlayer.board.placeShip([7, 7], [7, 8])
-  }
-
   stopGame() {
     const startBtn = document.getElementById('start-btn');
     const turnDisplay = document.getElementById('turn-display');
