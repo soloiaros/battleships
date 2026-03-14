@@ -1,5 +1,6 @@
 const soundToggle = document.getElementById('sound-toggle');
 const themeToggle = document.getElementById('theme-toggle');
+let darkmode = localStorage.getItem('darkmode');
 const main = document.querySelector('main');
 
 export default function setUpEventListeners() {
@@ -8,6 +9,19 @@ export default function setUpEventListeners() {
   });
   
   themeToggle.addEventListener('click', () => {
-    main.classList.contains('dark-mode') ? main.classList.remove('dark-mode') : main.classList.add('dark-mode');
-  })
+    darkmode = localStorage.getItem('darkmode');
+    darkmode === 'active' ? disableDarkMode() : enableDarkMode();
+  });
+
+  if (darkmode === 'active') enableDarkMode();
+}
+
+function enableDarkMode() {
+  main.classList.add('dark-mode');
+  localStorage.setItem('darkmode', 'active');
+}
+
+function disableDarkMode() {
+  main.classList.remove('dark-mode');
+  localStorage.setItem('darkmode', 'inactive');
 }
