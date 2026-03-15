@@ -129,6 +129,21 @@ export class Gameboard {
       queue.push([y + 1, x]);
     }
   }
+
+  canPlaceShip(coords, thisShip = null) {
+    thisShip = thisShip ? this.shipMap[thisShip[0][0]][thisShip[0][1]] : null;
+
+    for (let [i, j] of coords) {
+      for (let iDiff of [-1, 0, 1]) {
+        for (let jDiff of [-1, 0, 1]) {
+          if (i + iDiff >= 0 && i + iDiff < 10 && j + jDiff >= 0 && j + jDiff < 10) {
+            if (!(iDiff === 0 && jDiff === 0) && this.shipMap[i + iDiff][j + jDiff] && this.shipMap[i + iDiff][j + jDiff] !== thisShip) return false;
+          }
+        }
+      }
+    }
+    return true;
+  }
 }
 
 class Player {
