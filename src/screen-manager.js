@@ -80,13 +80,23 @@ export default class ScreenManager {
 
   addDraggingEvents(tableEl, player) {
     let isDragging = false;
-    let dragOffsetX, dragOffsetY, shipCells;
+    let dragOffsetX, dragOffsetY, shipCells, targetCellOrder, rect;
     const ghost = document.getElementById('ghost-container');
     ghost.style.pointerEvents = 'none';
 
-    const updateGhostPosition = (newX, newY) => {
-      ghost.style.left = `${newX - dragOffsetX}px`;
-      ghost.style.top = `${newY - dragOffsetY}px`;
+    const updateGhostPosition = (mouseX, mouseY) => {
+      ghost.style.left = `${mouseX - dragOffsetX}px`;
+      ghost.style.top = `${mouseY - dragOffsetY}px`;
+      
+      const hoveredCells = [];
+      let cell;
+      for (let i = 0; i < shipCells.length; i++) {
+        if (shipCells.length > 1 && shipCells[0][0] !== shipCells[1][0]) cell = document.elementFromPoint(mouseX, mouseY + (i - targetCellOrder) * rect.width);
+        else cell = document.elementFromPoint(mouseX + (i - targetCellOrder) * rect.height, mouseY);
+        hoveredCells.push(cell);
+      }
+      if (!hoveredCells) return;
+      // add logic for doing stuff with hovered cells here
     }
 
     tableEl.addEventListener('mousedown', (event) => {
@@ -97,8 +107,8 @@ export default class ScreenManager {
       const targetY = td.parentElement.rowIndex;
       shipCells = player.board.getAdjacentShipCells([targetY, targetX]);
 
-      const rect = td.getBoundingClientRect();
-      const targetCellOrder = shipCells.findIndex(currCell => {
+      rect = td.getBoundingClientRect();
+      targetCellOrder = shipCells.findIndex(currCell => {
         return currCell.every((coord, i) => coord === [targetY, targetX].at(i));
       });
       dragOffsetX = event.clientX - rect.left;
