@@ -148,7 +148,30 @@ describe('Test the Gameboard functionality', () => {
   it('Sorts adjacent ship cells', () => {
     board.placeShip([5, 5], [5, 4], [5, 3]);
     expect(JSON.stringify(board.getAdjacentShipCells([5, 5]))).toContain('[5,3],[5,4],[5,5]');
-  })
+  });
+
+  it('Recognizes where ships CAN be placed', () => {
+    expect(board.canPlaceShip([[0, 0], [0, 1], [0, 3]])).toBeTruthy();
+    expect(board.canPlaceShip([[5, 5]])).toBeTruthy();
+    expect(board.canPlaceShip([[3, 4], [4, 4]])).toBeTruthy();
+    board.placeShip([0, 0], [0, 1], [0, 3]);
+    expect(board.canPlaceShip([[6, 9], [7, 9], [8, 9], [9, 9]])).toBeTruthy();
+    expect(board.canPlaceShip([[2, 0], [2, 1], [2, 3]])).toBeTruthy();
+  });
+
+  it('Recognizes where ships CANNOT be placed', () => {
+    board.placeShip([0, 0], [0, 1], [0, 3]);
+    expect(board.canPlaceShip([[1, 0], [1, 1], [1, 3]])).toBeFalsy();
+    expect(board.canPlaceShip([[0, 4]])).toBeFalsy();
+    expect(board.canPlaceShip([[1, 4]])).toBeFalsy();
+  });
+
+  it('Recognizes where CURRENT ship CAN be placed', () => {
+    board.placeShip([0, 0], [0, 1], [0, 3]);
+    expect(board.canPlaceShip([[1, 0], [1, 1], [1, 3]], [[0, 0], [0, 1], [0, 3]])).toBeTruthy();
+    expect(board.canPlaceShip([[0, 4]], [[0, 0], [0, 1], [0, 3]])).toBeTruthy();
+    expect(board.canPlaceShip([[1, 4]], [[0, 0], [0, 1], [0, 3]])).toBeTruthy();
+  });
   
 });
 
