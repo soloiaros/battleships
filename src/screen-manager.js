@@ -80,15 +80,16 @@ export default class ScreenManager {
 
   addDraggingEvents(tableEl, player) {
     let isDragging = false;
-    let dragOffsetX, dragOffsetY, shipCells, targetCellOrder, rect;
+    let dragOffsetX, dragOffsetY, shipCells, targetCellOrder, rect, hoveredCells;
     const ghost = document.getElementById('ghost-container');
     ghost.style.pointerEvents = 'none';
 
     const updateGhostPosition = (mouseX, mouseY) => {
       ghost.style.left = `${mouseX - dragOffsetX}px`;
       ghost.style.top = `${mouseY - dragOffsetY}px`;
-      
-      const hoveredCells = [];
+
+      if (hoveredCells) hoveredCells.forEach(cell => { cell.classList.remove('ghost-hovered') });
+      hoveredCells = [];
       let cell;
       for (let i = 0; i < shipCells.length; i++) {
         if (shipCells.length > 1 && shipCells[0][0] !== shipCells[1][0]) cell = document.elementFromPoint(mouseX, mouseY + (i - targetCellOrder) * rect.width);
@@ -96,7 +97,11 @@ export default class ScreenManager {
         hoveredCells.push(cell);
       }
       if (!hoveredCells) return;
-      // add logic for doing stuff with hovered cells here
+      
+      const hoveredCellsCoords = hoveredCells.map(cell => [cell.parentElement.parentElement.rowIndex, cell.parentElement.cellIndex]);
+      if (player.board.canPlaceShip(hoveredCellsCoords, shipCells)) {
+        hoveredCells.forEach(cell => { cell.classList.add('ghost-hovered') });
+      }
     }
 
     tableEl.addEventListener('mousedown', (event) => {
@@ -139,7 +144,8 @@ export default class ScreenManager {
       shipCells.forEach(([y, x]) => {
         const cell = tableEl.rows[y].cells[x].querySelector('div');
         cell.classList.remove('dragged');
-      })
+      });
+      if (hoveredCells) hoveredCells.forEach(cell => { cell.classList.remove('ghost-hovered') });
     });
   }
 

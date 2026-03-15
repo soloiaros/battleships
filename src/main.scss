@@ -40,7 +40,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.2s ease;
+  transition: all 50ms ease;
 }
 
 #ghost-container {
@@ -215,6 +215,9 @@ table {
       &.dragged {
         background-color: hsl(from var(--accent-color-blue) h 30% 70%);
       }
+    }
+    td div.ghost-hovered {
+      background-color: lightgreen;
     }
   }
 
