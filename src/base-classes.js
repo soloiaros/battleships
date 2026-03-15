@@ -38,6 +38,12 @@ export class Gameboard {
       this.shipMap[YXPair.at(0)][YXPair.at(1)] = ship;
     }
   }
+
+  removeShip(...coords) {
+    for (let [i, j] of coords) {
+      this.shipMap[i][j] = null;
+    }
+  }
   
   shoot(YXPair) { // method for handling all events that happen on incoming shot
     this.receiveAttack(YXPair);
@@ -131,11 +137,10 @@ export class Gameboard {
   }
 
   canPlaceShip(coords, thisShip = null) {
-    console.log(coords)
     thisShip = thisShip ? this.shipMap[thisShip[0][0]][thisShip[0][1]] : null;
 
     for (let [i, j] of coords) {
-      if (!i || !j || i < 0 || i >= 10 || j < 0 || j >= 10) return false;
+      if ((!i && i !== 0) || (!j && j !== 0) || i < 0 || i >= 10 || j < 0 || j >= 10) return false;
       for (let iDiff of [-1, 0, 1]) {
         for (let jDiff of [-1, 0, 1]) {
           if (i + iDiff >= 0 && i + iDiff < 10 && j + jDiff >= 0 && j + jDiff < 10) {
