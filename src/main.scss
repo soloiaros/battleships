@@ -212,6 +212,9 @@ table {
   &#table-1 {
     td div.ship {
       background-color: var(--accent-color-blue);
+      &.dragged {
+        background-color: hsl(from var(--accent-color-blue) h 30% 70%);
+      }
     }
   }
 

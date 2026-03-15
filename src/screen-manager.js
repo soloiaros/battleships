@@ -80,7 +80,7 @@ export default class ScreenManager {
 
   addDraggingEvents(tableEl, player) {
     let isDragging = false;
-    let dragOffsetX, dragOffsetY;
+    let dragOffsetX, dragOffsetY, shipCells;
     const ghost = document.getElementById('ghost-container');
     ghost.style.pointerEvents = 'none';
 
@@ -98,12 +98,13 @@ export default class ScreenManager {
       const rect = td.getBoundingClientRect();
       dragOffsetX = event.clientX - rect.left;
       dragOffsetY = event.clientY - rect.top;
-      const shipCells = player.board.getAdjacentShipCells([targetY, targetX]);
+      shipCells = player.board.getAdjacentShipCells([targetY, targetX]);
 
       ghost.innerHTML = '';
       ghost.style.display = 'block';
       shipCells.forEach(([y, x]) => {
-        const cell = tableEl.rows[y].cells[x];
+        const cell = tableEl.rows[y].cells[x].querySelector('div');
+        cell.classList.add('dragged');
 
         const ghostCell = document.createElement('div');
         ghost.appendChild(ghostCell);
@@ -117,9 +118,12 @@ export default class ScreenManager {
     });
 
     tableEl.addEventListener('mouseup', () => {
-      console.log(1)
       isDragging = false;
       ghost.style.display = 'block';
+      shipCells.forEach(([y, x]) => {
+        const cell = tableEl.rows[y].cells[x].querySelector('div');
+        cell.classList.remove('dragged');
+      })
     });
   }
 
