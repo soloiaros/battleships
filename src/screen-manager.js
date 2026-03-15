@@ -75,6 +75,52 @@ export default class ScreenManager {
     this.updateBoard(this.compPlayer);
     document.querySelector(`.board-container:nth-child(1) table`).classList = 'active';
     document.querySelector(`.board-container:nth-child(2) table`).classList = 'inactive';
+    this.addDraggingEvents(document.querySelector(`.board-container:nth-child(1) table`), this.humanPlayer);
+  }
+
+  addDraggingEvents(tableEl, player) {
+    let isDragging = false;
+    let dragOffsetX, dragOffsetY;
+    const ghost = document.getElementById('ghost-container');
+    ghost.style.pointerEvents = 'none';
+
+    const updateGhostPosition = (newX, newY) => {
+      ghost.style.left = `${newX - dragOffsetX}px`;
+      ghost.style.top = `${newY - dragOffsetY}px`;
+    }
+
+    tableEl.addEventListener('mousedown', (event) => {
+      const td = event.target.closest('td');
+      if (!td || !td.querySelector('div').classList.contains('ship')) return;
+
+      const targetX = td.cellIndex;
+      const targetY = td.parentElement.rowIndex;
+      const rect = td.getBoundingClientRect();
+      dragOffsetX = event.clientX - rect.left;
+      dragOffsetY = event.clientY - rect.top;
+      const shipCells = player.board.getAdjacentShipCells([targetY, targetX]);
+
+      ghost.innerHTML = '';
+      ghost.style.display = 'block';
+      shipCells.forEach(([y, x]) => {
+        const cell = tableEl.rows[y].cells[x];
+
+        const ghostCell = document.createElement('div');
+        ghost.appendChild(ghostCell);
+        isDragging = true;
+        updateGhostPosition(event.clientX, event.clientY);
+      });
+    });
+
+    tableEl.addEventListener('mousemove', (event) => {
+      if (isDragging) updateGhostPosition(event.clientX, event.clientY);
+    });
+
+    tableEl.addEventListener('mouseup', () => {
+      console.log(1)
+      isDragging = false;
+      ghost.style.display = 'block';
+    });
   }
 
   placeShipsRandomly(board) {

@@ -33,6 +33,26 @@ main {
   background-color: var(--background-color);
 }
 
+@mixin table-cell-div {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+#ghost-container {
+  position: absolute;
+
+  div {
+    @include table-cell-div;
+    background-color: var(--accent-color-blue);
+    opacity: 50%;
+  }
+}
+
 .settings-bar {
   position: fixed;
   right: 1.5rem;
@@ -219,15 +239,8 @@ table {
   }
 }
 
-
 .board-cell {
-  width: var(--cell-size);
-  height: var(--cell-size);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.2s ease;
+  @include table-cell-div;
 }
 
 .board-cell {
