@@ -95,13 +95,19 @@ export default class ScreenManager {
 
       const targetX = td.cellIndex;
       const targetY = td.parentElement.rowIndex;
-      const rect = td.getBoundingClientRect();
-      dragOffsetX = event.clientX - rect.left;
-      dragOffsetY = event.clientY - rect.top;
       shipCells = player.board.getAdjacentShipCells([targetY, targetX]);
 
+      const rect = td.getBoundingClientRect();
+      const targetCellOrder = shipCells.findIndex(currCell => {
+        return currCell.every((coord, i) => coord === [targetY, targetX].at(i));
+      });
+      dragOffsetX = event.clientX - rect.left;
+      dragOffsetY = event.clientY - rect.top;
+      if (shipCells.length > 1) shipCells[0][0] !== shipCells[1][0] ? dragOffsetY += targetCellOrder * rect.height : dragOffsetX += targetCellOrder * rect.height; // needed so that 'ghosts' get calculated from the actual dragged cell
+
       ghost.innerHTML = '';
-      ghost.style.display = 'block';
+      ghost.style.display = 'flex';
+      ghost.style.flexDirection = shipCells.length > 1 && shipCells[0][0] !== shipCells[1][0] ? 'column' : 'row';
       shipCells.forEach(([y, x]) => {
         const cell = tableEl.rows[y].cells[x].querySelector('div');
         cell.classList.add('dragged');
@@ -119,7 +125,7 @@ export default class ScreenManager {
 
     tableEl.addEventListener('mouseup', () => {
       isDragging = false;
-      ghost.style.display = 'block';
+      ghost.style.display = 'none';
       shipCells.forEach(([y, x]) => {
         const cell = tableEl.rows[y].cells[x].querySelector('div');
         cell.classList.remove('dragged');
