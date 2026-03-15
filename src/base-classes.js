@@ -111,7 +111,13 @@ export class Gameboard {
     const cells = [];
 
     while (true) {
-      if (!queue.length) return cells;
+      if (!queue.length) {
+        if (cells.length > 1 && cells[0][0] != cells[1][0]) {
+          cells.sort((coord1, coord2) => coord1[0] - coord2[0]);
+        }
+        else cells.sort((coord1, coord2) => coord1[1] - coord2[1]);
+        return cells;
+      }
 
       const [y, x] = queue.shift();
       if (y < 0 || y >= 10 || x < 0 || x >= 10 || !this.shipMap[y][x] || visited.includes(`${y}${x}`)) continue;
