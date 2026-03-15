@@ -104,6 +104,25 @@ export class Gameboard {
       }
     }
   }
+
+  getAdjacentShipCells(YXPair) {
+    const queue = [YXPair];
+    const visited = [];
+    const cells = [];
+
+    while (true) {
+      if (!queue.length) return cells;
+
+      const [y, x] = queue.shift();
+      if (y < 0 || y >= 10 || x < 0 || x >= 10 || !this.shipMap[y][x] || visited.includes(`${y}${x}`)) continue;
+      cells.push([y, x]);
+      visited.push(`${y}${x}`);
+      queue.push([y - 1, x]);
+      queue.push([y, x - 1]);
+      queue.push([y, x + 1]);
+      queue.push([y + 1, x]);
+    }
+  }
 }
 
 class Player {
