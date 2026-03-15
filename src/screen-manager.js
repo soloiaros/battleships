@@ -80,7 +80,7 @@ export default class ScreenManager {
 
   addDraggingEvents(tableEl, player) {
     let isDragging = false;
-    let dragOffsetX, dragOffsetY, shipCells, targetCellOrder, rect, hoveredCells;
+    let dragOffsetX, dragOffsetY, shipCells, targetCellOrder, rect, hoveredCells, hoveredCellsCoords;
     const ghost = document.getElementById('ghost-container');
     ghost.style.pointerEvents = 'none';
 
@@ -98,7 +98,7 @@ export default class ScreenManager {
       }
       if (!hoveredCells) return;
       
-      const hoveredCellsCoords = hoveredCells.map(cell => [cell.parentElement.parentElement.rowIndex, cell.parentElement.cellIndex]);
+      hoveredCellsCoords = hoveredCells.map(cell => [cell.parentElement.parentElement.rowIndex, cell.parentElement.cellIndex]);
       if (player.board.canPlaceShip(hoveredCellsCoords, shipCells)) {
         hoveredCells.forEach(cell => { cell.classList.add('ghost-hovered') });
       }
@@ -146,6 +146,12 @@ export default class ScreenManager {
         cell.classList.remove('dragged');
       });
       if (hoveredCells) hoveredCells.forEach(cell => { cell.classList.remove('ghost-hovered') });
+
+      if (player.board.canPlaceShip(hoveredCellsCoords, shipCells) && hoveredCellsCoords) {
+        player.board.removeShip(...shipCells);
+        player.board.placeShip(...hoveredCellsCoords);
+        this.updateBoard(player);
+      }
     });
   }
 
@@ -239,6 +245,8 @@ export default class ScreenManager {
         }
         if (shipMap[i][j]) {
           if (!tableCell.classList.contains('ship')) tableCell.classList.add('ship');
+        } else {
+          if (tableCell.classList.contains('ship')) tableCell.classList.remove('ship');
         }
       }
     }
