@@ -45,11 +45,12 @@ main {
 
 #ghost-container {
   position: absolute;
+  pointer-events: none;
 
   div {
     @include table-cell-div;
-    background-color: var(--accent-color-blue);
-    opacity: 50%;
+    background-color: color-mix(in srgb, var(--accent-color-blue), transparent 70%);
+    border: 1px dashed var(--accent-color-blue);
   }
 }
 
@@ -212,12 +213,20 @@ table {
   &#table-1 {
     td div.ship {
       background-color: var(--accent-color-blue);
+      cursor: grab;
+
+      &:active {
+        cursor: grabbing;
+      }
+
       &.dragged {
         background-color: hsl(from var(--accent-color-blue) h 30% 70%);
+        cursor: grabbing;
       }
     }
     td div.ghost-hovered {
-      background-color: lightgreen;
+      background-color: color-mix(in srgb, var(--accent-color-blue), #90ee90 60%);
+      box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--accent-color-blue), #28a745 30%);
     }
   }
 
