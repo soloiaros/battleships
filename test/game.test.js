@@ -163,6 +163,9 @@ describe('Test the Gameboard functionality', () => {
     board.placeShip([0, 0], [0, 1], [0, 3]);
     expect(board.canPlaceShip([[1, 0], [1, 1], [1, 3]])).toBeFalsy();
     expect(board.canPlaceShip([[0, 4]])).toBeFalsy();
+    expect(board.canPlaceShip([[-1, -1]])).toBeFalsy();
+    expect(board.canPlaceShip([[10, 10]])).toBeFalsy();
+    expect(board.canPlaceShip([[8, 8], [9, 8], [10, 8]])).toBeFalsy();
     expect(board.canPlaceShip([[1, 4]])).toBeFalsy();
   });
 
