@@ -143,6 +143,11 @@ describe('Test the Gameboard functionality', () => {
     expect(JSON.stringify(board.getAdjacentShipCells([5, 5]))).toContain('[5,4]');
     expect(JSON.stringify(board.getAdjacentShipCells([5, 5]))).toContain('[5,3]');
     expect(board.getAdjacentShipCells([5, 5]).length).toBe(3);
+  });
+
+  it('Sorts adjacent ship cells', () => {
+    board.placeShip([5, 5], [5, 4], [5, 3]);
+    expect(JSON.stringify(board.getAdjacentShipCells([5, 5]))).toContain('[5,3],[5,4],[5,5]');
   })
   
 });
