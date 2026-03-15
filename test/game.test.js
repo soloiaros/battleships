@@ -175,6 +175,13 @@ describe('Test the Gameboard functionality', () => {
     expect(board.canPlaceShip([[0, 4]], [[0, 0], [0, 1], [0, 3]])).toBeTruthy();
     expect(board.canPlaceShip([[1, 4]], [[0, 0], [0, 1], [0, 3]])).toBeTruthy();
   });
+
+  it('Can remove a ship from the board', () => {
+    board.placeShip([0, 0], [0, 1], [0, 3]);
+    expect(board.shipsAlive).toBe(1);
+    board.removeShip([0, 0], [0, 1], [0, 3]);
+    expect(board.shipsAlive).toBe(0);
+  });
   
 });
 
